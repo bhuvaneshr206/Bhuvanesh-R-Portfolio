@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  --bg:#0a0c14; --bg2:#0f1117; --bg3:#161b27;
+  --border:#1e2a3a; --text:#e2e8f0; --muted:#64748b;
+  --brand:#22d3ee; --brand2:#06b6d4;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; scroll-padding-top:70px; }
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body.light{ --bg:#f8fafc; --bg2:#ffffff; --bg3:#f1f5f9; --border:#e2e8f0; --text:#0f172a; --muted:#64748b; }
+
+::-webkit-scrollbar{ width:4px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:#1e2a3a; border-radius:4px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--brand2); }
+::selection{ background:rgba(34,211,238,0.2); }
+
+/* ─── KEYFRAMES (only lightweight ones) ─── */
+@keyframes shimmer{ 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes pulseSlow{ 0%,100%{opacity:0.4;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.06)} }
+@keyframes spinSlow{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes borderGlow{ 0%,100%{border-color:rgba(34,211,238,0.1)} 50%{border-color:rgba(34,211,238,0.45)} }
+@keyframes glowPulse{ 0%,100%{box-shadow:0 0 20px rgba(34,211,238,0.15)} 50%{box-shadow:0 0 50px rgba(34,211,238,0.45)} }
+@keyframes ripple{ 0%{transform:scale(0);opacity:0.6} 100%{transform:scale(4);opacity:0} }
+
+.animate-float     { animation:float 4s ease-in-out infinite; }
+.animate-pulse-slow{ animation:pulseSlow 3s ease-in-out infinite; }
+.animate-border-glow{ animation:borderGlow 2.5s ease-in-out infinite; }
+.animate-glow-pulse{ animation:glowPulse 3s ease-in-out infinite; }
+
+/* ─── COMPONENT LAYER ─── */
+@layer components{
+  .btn-primary{
+    @apply inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl
+           bg-cyan-500 text-slate-900 font-semibold text-sm
+           hover:bg-cyan-400 active:scale-95;
+    transition:background 0.2s ease, transform 0.15s ease;
+    position:relative; overflow:hidden;
+  }
+  .btn-primary::after{
+    content:''; position:absolute; inset:0;
+    background:rgba(255,255,255,0.18);
+    transform:translateX(-100%);
+    transition:transform 0.3s ease;
+  }
+  .btn-primary:hover::after{ transform:translateX(0); }
+
+  .btn-ghost{
+    @apply inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl
+           border border-slate-700 text-slate-300 font-medium text-sm
+           hover:border-cyan-500/50 hover:text-white;
+    transition:all 0.2s ease;
+  }
+  .btn-outline{
+    @apply inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl
+           border border-cyan-500/40 text-cyan-400 font-medium text-sm
+           hover:bg-cyan-500/10;
+    transition:all 0.2s ease;
+  }
+
+  /* Card — Framer Motion handles the lift; CSS handles border+shadow */
+  .card{
+    @apply bg-[var(--bg2)] border border-[var(--border)] rounded-2xl;
+  }
+
+  .input{
+    @apply w-full px-4 py-2.5 sm:py-3 rounded-xl bg-[var(--bg)] border border-[var(--border)]
+           text-[var(--text)] placeholder:text-slate-600 text-sm
+           focus:outline-none focus:border-cyan-500/60 focus:ring-2 focus:ring-cyan-500/10;
+    transition:border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .input:focus{
+    box-shadow:0 0 0 3px rgba(34,211,238,0.1),0 0 20px rgba(34,211,238,0.05);
+  }
+  .label{ @apply block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2; }
+
+  .section-tag{ @apply inline-flex items-center gap-2 text-xs font-mono text-cyan-400 tracking-widest uppercase; }
+  .section-title{ @apply text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] leading-tight; }
+
+  .skeleton{
+    background:linear-gradient(90deg,var(--bg2) 25%,var(--bg3) 50%,var(--bg2) 75%);
+    background-size:200% 100%;
+    animation:shimmer 1.8s ease-in-out infinite;
+  }
+  .gradient-text{
+    background:linear-gradient(135deg,#22d3ee,#818cf8);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+
+  /* Tech tags */
+  .tech-tag{
+    @apply inline-block px-2.5 py-0.5 rounded-md text-xs font-mono
+           bg-slate-800 text-slate-400 border border-slate-700;
+    transition:all 0.2s ease;
+  }
+  .tech-tag:hover{
+    @apply border-cyan-400/40 text-cyan-400;
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(34,211,238,0.15);
+  }
+
+  /* Skill bar */
+  .skill-bar{ @apply h-1.5 rounded-full bg-slate-800 overflow-hidden relative; }
+  .skill-bar-fill{
+    @apply h-full rounded-full relative;
+    transition:width 1.3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .skill-bar-fill::after{
+    content:''; position:absolute; top:0; right:0;
+    width:6px; height:6px; border-radius:50%;
+    background:white; opacity:0.85;
+    box-shadow:0 0 8px rgba(255,255,255,0.7);
+  }
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){ html{font-size:14px;} }
+@media(min-width:641px)and(max-width:1024px){ html{font-size:15px;} }
+@media(min-width:1025px){ html{font-size:16px;} }
+@media(max-width:768px){
+  .btn-primary,.btn-ghost,.btn-outline{ @apply text-sm px-4 py-2; }
+  .card{ @apply rounded-xl; }
+  .section-title{ @apply text-2xl; }
+  section{ overflow-x:hidden; }
+}
+@media(max-width:1024px){ .admin-layout{flex-direction:column;} }
