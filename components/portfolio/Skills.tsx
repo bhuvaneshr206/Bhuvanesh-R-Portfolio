@@ -36,7 +36,7 @@ function SkillBar({ level, color }: { level: number; color: string }) {
 
 export default function Skills({ skills }: { skills: Skill[] }) {
   const list = skills.length ? skills : FALLBACK;
-  const categories = [...new Set(list.map(s => s.category))];
+  const categories = Array.from(new Set(list.map(s => s.category)));
 
   return (
     <section id="skills" className="py-16 sm:py-28 px-4 sm:px-5">
