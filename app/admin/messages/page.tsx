@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getMessages, markMessageRead, deleteMessage } from "@/lib/supabase/client";
 import type { Message } from "@/lib/types";
-import { FiMail, FiMailOpen, FiTrash2, FiRefreshCw } from "react-icons/fi";
+import { FiMail, FiCheckCircle, FiTrash2, FiRefreshCw } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 export default function AdminMessagesPage() {
@@ -46,7 +46,7 @@ export default function AdminMessagesPage() {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${!m.read ? "bg-cyan-500/15 border border-cyan-500/20" : "bg-slate-800"}`}>
-                    {m.read ? <FiMailOpen size={15} className="text-slate-500" /> : <FiMail size={15} className="text-cyan-400" />}
+                    {m.read ? <FiCheckCircle size={15} className="text-slate-500" /> : <FiMail size={15} className="text-cyan-400" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -61,7 +61,7 @@ export default function AdminMessagesPage() {
                 <div className="flex gap-1 shrink-0">
                   {!m.read && (
                     <button onClick={() => handleRead(m.id)} className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all" title="Mark as read">
-                      <FiMailOpen size={13} />
+                      <FiCheckCircle size={13} />
                     </button>
                   )}
                   <button onClick={() => handleDelete(m.id)} className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all">
