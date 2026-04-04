@@ -58,9 +58,9 @@ export default function Hero({ profile }: { profile: Profile | null }) {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 pt-16">
 
       {/* Parallax grid bg */}
-      <motion.div style={{ y: bgY }}
+      <motion.div
         className="absolute inset-0 pointer-events-none"
-        style={{ backgroundImage: "linear-gradient(rgba(34,211,238,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,0.03) 1px,transparent 1px)", backgroundSize: "60px 60px", y: bgY }} />
+        style={{ y: bgY, backgroundImage: "linear-gradient(rgba(34,211,238,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,0.03) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
 
       {/* Glow blobs */}
       <div className="absolute top-1/3 left-1/4 w-72 sm:w-96 h-72 sm:h-96 rounded-full pointer-events-none blur-3xl" style={{ background: "radial-gradient(circle,rgba(34,211,238,0.07) 0%,transparent 70%)" }} />
@@ -142,9 +142,8 @@ export default function Hero({ profile }: { profile: Profile | null }) {
             {/* Photo */}
             <motion.div whileHover={{ scale: 1.04 }} transition={{ duration: 0.4, ease }}
               animate={{ y: [0, -10, 0] }}
-              style={{ animationDuration: "6s" }}
               className="relative overflow-hidden border-2 border-cyan-400/20 animate-glow-pulse"
-              style={{ width: "clamp(180px,40vw,340px)", height: "clamp(180px,40vw,340px)", borderRadius: "50%", boxShadow: "0 0 80px rgba(34,211,238,0.15)" }}>
+              style={{ animationDuration: "6s", width: "clamp(180px,40vw,340px)", height: "clamp(180px,40vw,340px)", borderRadius: "50%", boxShadow: "0 0 80px rgba(34,211,238,0.15)" }}>
               {profile?.avatar_url ? (
                 <motion.div className="w-full h-full" whileHover={{ scale: 1.08 }} transition={{ duration: 0.5, ease }}>
                   <Image src={profile.avatar_url} alt={name} fill
