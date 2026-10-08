@@ -44,13 +44,13 @@ export default async function HomePage() {
       <main>
         <Hero         profile={profile} />
         <About        profile={profile} />
-        <Services     services={services} />
+        {/* <Services     services={services} /> */}
         <Skills       skills={skills} />
         <Experience   experience={experience} />
         <Education    education={education} />
         <Projects     projects={projects} />
         <Certificates certificates={certificates} />
-        <Testimonials testimonials={testimonials} />
+        {/* <Testimonials testimonials={testimonials} /> */}
         <Contact      profile={profile} />
       </main>
       <Footer profile={profile} />
